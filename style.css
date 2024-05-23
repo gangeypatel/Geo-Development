@@ -1,0 +1,58 @@
+.myContainer {
+    margin: auto;
+    width: 1510px;
+    /* background-color: rgb(234, 244, 238); */
+}
+
+#line_div {
+    float: left;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 15px;
+    float: left;
+    width: fit-content;
+    background-color: beige;
+}
+
+.control_panel {
+    float: right;
+    width: 50%;
+    background-color: rgb(234, 244, 238)
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    /* display: inline-block; */
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    /* float: right; */
+}
+
+*/ .buttons {
+    /* margin: auto; */
+}
+
+select {
+    /* float: right; */
+    margin: auto;
+}
+
+svg {
+    width: 1510px;
+    height: 800px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin: auto;
+    justify-content: center;
+}
+
+.my-row{
+    display: flex;
+    flex-direction: row;
+}

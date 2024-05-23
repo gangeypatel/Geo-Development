@@ -1,0 +1,170 @@
+<html lang='en'>
+
+<head>
+    <title>Homework #2: D3 Linking - CSE 578 - Spring 2023</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* .myContainer {
+            margin: auto;
+            width: 1510px;
+        }
+
+        #line_div {
+            float:left;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            float: left;
+            width: 1510px;
+        }
+
+        .control_panel {
+            float: right;
+            width: 50%;
+        } 
+
+        .checkbox {
+            display: flex;
+    justify-content: center;
+        }
+        .controls {
+            display: inline-block;
+            padding: 1rem 1rem;
+            vertical-align: middle;
+            float:right;
+        } */
+
+         .buttons {
+            /* margin: auto; */
+        } 
+
+        select {
+            float: right;
+            margin: auto;
+        } */
+
+        svg {
+            width: 1210px;
+            height: 800px;
+            background-color: white;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+            margin: auto;
+            justify-content: center;
+        }
+        .vd{
+            width: 2px;
+            height: inherit;
+            background-color: black;
+        }
+    </style> 
+</head>
+
+<body>
+    <div class="myContainer">
+        <h1 class="text-center">Homework #3: D3 joins</h1>
+        <h3 class="text-center">Gangey A Patel - gpatel8@asu.edu</h3>
+        <hr>
+        <div class="my-row" style="justify-content: space-between; max-width: 960px; margin: 0 auto;">
+            <h4>Regions</h4>
+            <h4>Graph Control</h4>
+            <h4>Axis Control</h4>
+        </div>
+        <div class="container">
+            <div id = "all-controls" class="container">
+                <div id="control_panel" class=" row">
+                <div class="col-5" style="width: 33%; border-right: solid 2px black;">
+                    <div id="checkbox"  onclick="getvaluefromcheckbox();" onchange="play();">
+                    </div>
+                    <div id="buttons" class="mt-3" style="margin: 0px;">
+                        <button class="btn btn-success" id="SelectAll" onclick="selectAll()" style="width: 150px; margin-right: 20px;">
+                            Select All
+                        </button>
+                        <button class="btn btn-secondary" onclick="deselectAllCheckboxes()" style="width: 150px;">
+                            Deselect All
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-5" style="width: 33%; margin-top: auto;">
+                    <div class ="form-check form-switch my-row" style="align-items: center; margin-bottom: 50px; justify-items: center; padding: 0 50px;">
+                        
+                        <!-- <label for="countrytoggle">Flag</label> -->
+                        <div style="font-size: 14px;">Country Names</div>
+                        <input class="form-check-input" type="checkbox" id="countrytoggle" style="width: 50px; height: 30px; margin-left: 20px; margin-right: 20px;" onchange="test1()">
+                        <div style="font-size: 14px;">Country Flags</div>
+                    </div>
+                    <div class="my-row" style="justify-content: center;">
+                        <div id="play">
+                            <button class="btn btn-success" style="width: 150px; margin-right: 25px;" onclick="playanimation()">Play</button>
+                        </div>
+                        <div id="pause">
+                            <button class="btn btn-secondary" onclick="stopanimation()" style="width: 150px">Pause</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class ="col-5"> -->
+                    <div id="controls" class="container col" style="width: 33%; border-left: solid 2px black; padding-left: 80px;">
+                        <div class="row" style="justify-content: center;">
+                            <div style="width: 30%;">
+                                <label for="year-from"> Year from</label>
+                                <input  type="number" id="year-from" min="1980" max="2013" value="1980" onchange="test1();" oninput="test1()" style="width: 70px;">
+                            </div>
+                            <div style="width: 30%;">
+                                <label for="year-to"> Year to</label>
+                                <input  type="number" id="year-to" min="1980" max="2013" value="2013" onchange="test1();" oninput="test1()" style="width: 70px;">
+                            </div>
+                        </div>
+                        <!-- <div class="row" style="margin-top: 25px; justify-content: center;"> -->
+                            <!-- <label for="opacity">Opacity val</label> -->
+                            <div class="row" style="justify-content: center; margin-top: 25px;">
+                                Opacity
+                            </div>
+                            <div class="row" style="justify-content: center;">
+                                <input type="range" id="opacity" min="0.2" max="1" value="1" step="0.1" onchange="getOpacity(this.value);" oninput="getOpacity(this.value)">
+                            </div>
+                        <!-- </div> -->
+                        
+                        <!-- <input type="range" id="year-to" min="1980" max="2013" value="2013"> -->
+                        <div style="margin-top: 60px;" id="xyz">
+                            <select id="dropdown" class="btn btn-secondary dropdown-toggle" onchange="test1()" style="width: 100%;"></select>
+                            <!-- <button class="dropbtn">Dropdown</button> -->
+                        </div>
+                        <!-- <div class="my-row">
+                            <div id="play">
+                                <button class="btn btn-secondary" style="width: 150px; margin-right: 25px;" onclick="playanimation()">Play</button>
+                            </div>
+                            <div id="pause">
+                                <button class="btn btn-secondary" onclick="stopanimation()" style="width: 150px">Pause</button>
+                            </div>
+                        </div> -->
+                    </div>
+                <!-- </div> -->
+                <!-- <div class ="form-check form-switch">
+                    <label for="countrytoggle">Flag</label>
+                    <input class="form-check-input" type="checkbox" id="countrytoggle" onchange="test1()">
+                </div> -->
+            </div>
+        </div>
+        
+    </div>
+        
+
+        <div style="display: flex; justify-content: center; margin-top: 15px; margin-bottom: 15px;">
+            <input type="range" id="play-slider" min="1980" max="2013" step ="1" value="1980" onchange="playslider()" oninput="playslider()" style="width: 80%;">
+        </div>
+        <div id="line_div"  style="display:flex;justify-content: center;" class="row border border-dark rounded bg-light shadow-sm">
+            <div class="col">
+                <svg id="line_svg"></svg>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
